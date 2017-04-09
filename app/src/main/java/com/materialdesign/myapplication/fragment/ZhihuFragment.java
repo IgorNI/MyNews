@@ -15,9 +15,8 @@ import com.materialdesign.myapplication.view.GridItemDividerDecoration;
 import com.materialdesign.myapplication.R;
 import com.materialdesign.myapplication.widget.WrapContentLinearLayoutManager;
 import com.materialdesign.myapplication.adapter.ItemAdapter;
-import com.materialdesign.myapplication.bean.Cheeses;
-import com.materialdesign.myapplication.bean.ZhihuDaily;
-import com.materialdesign.myapplication.presenter.ZhihuPresrenter;
+import com.materialdesign.myapplication.bean.zhihu.ZhihuDaily;
+import com.materialdesign.myapplication.presenter.ZhihuPresenter;
 import com.materialdesign.myapplication.presenter.implPresenter.ZhihuPresenterImpl;
 import com.materialdesign.myapplication.presenter.implView.IZhihuFragment;
 
@@ -30,7 +29,7 @@ import butterknife.ButterKnife;
 
 public class ZhihuFragment extends Fragment implements IZhihuFragment {
 
-    private ZhihuPresrenter zhihuPresenter;
+    private ZhihuPresenter zhihuPresenter;
     LinearLayoutManager mLinearLayoutManager;
     RecyclerView.OnScrollListener loadingMoreListener;
     private String mCurrentDate;  // 当前天
@@ -113,7 +112,8 @@ public class ZhihuFragment extends Fragment implements IZhihuFragment {
 
     private void initDate() {
         zhihuPresenter = new ZhihuPresenterImpl(getContext(),ZhihuFragment.this);
-        adapter = new ItemAdapter(getContext(),zhihuPresenter.getCheeseList(Cheeses.sCheeseStrings,30));
+        adapter = new ItemAdapter(getContext());
+//        adapter = new ItemAdapter(getContext(),zhihuPresenter.getCheeseList(Cheeses.sCheeseStrings,30));
         zhihuPresenter.getLastZhihuNews();
     }
 
@@ -148,5 +148,11 @@ public class ZhihuFragment extends Fragment implements IZhihuFragment {
     @Override
     public void showError(String s) {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        zhihuPresenter.unsubscribe();
     }
 }

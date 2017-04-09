@@ -4,14 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import com.materialdesign.myapplication.api.ApiManager;
-import com.materialdesign.myapplication.bean.ZhihuDaily;
-import com.materialdesign.myapplication.bean.ZhihuDailyItem;
+import com.materialdesign.myapplication.bean.zhihu.ZhihuDaily;
+import com.materialdesign.myapplication.bean.zhihu.ZhihuDailyItem;
 import com.materialdesign.myapplication.fragment.ZhihuFragment;
-import com.materialdesign.myapplication.presenter.ZhihuPresrenter;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import com.materialdesign.myapplication.presenter.ZhihuPresenter;
 
 import rx.Observer;
 import rx.Subscription;
@@ -23,7 +19,7 @@ import rx.schedulers.Schedulers;
  * Created by ni on 2017/3/23.
  */
 
-public class ZhihuPresenterImpl extends BasePresenterImpl implements ZhihuPresrenter {
+public class ZhihuPresenterImpl extends BasePresenterImpl implements ZhihuPresenter {
 
     private static final String TAG = ZhihuPresenterImpl.class.getSimpleName();
     private Context mContext;
@@ -39,15 +35,15 @@ public class ZhihuPresenterImpl extends BasePresenterImpl implements ZhihuPresre
     /**
      * 获取知乎头条的新闻
      * */
-    @Override
-    public List<String> getCheeseList(String[] array, int amount) {
-        ArrayList<String> list = new ArrayList<>();
-        Random random = new Random();
-        while (list.size() < amount) {
-            list.add(array[random.nextInt(array.length)]);
-        }
-        return list;
-    }
+//    @Override
+//    public List<String> getCheeseList(String[] array, int amount) {
+//        ArrayList<String> list = new ArrayList<>();
+//        Random random = new Random();
+//        while (list.size() < amount) {
+//            list.add(array[random.nextInt(array.length)]);
+//        }
+//        return list;
+//    }
 
     @Override
     public void getLastZhihuNews() {

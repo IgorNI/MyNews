@@ -1,5 +1,7 @@
 package com.materialdesign.myapplication.api;
 
+import java.util.Objects;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -12,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiManager {
     public static ApiManager apiManager;
     public ZhihuApi zhihuApi;
+    public NewsApi newsApi;
     private Object zhihuMonitor = new Object();
 
     public static ApiManager getInstance() {
@@ -39,5 +42,21 @@ public class ApiManager {
             }
         }
         return zhihuApi;
+    }
+
+    public NewsApi getNewsApiService() {
+        if (newsApi == null) {
+            synchronized (zhihuMonitor) {
+                if (newsApi == null) {
+                    newsApi = new Retrofit.Builder()
+                            .baseUrl("http://c.m.163.com")
+                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                            .client(new OkHttpClient())
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build().create(NewsApi.class);
+                }
+            }
+        }
+        return newsApi;
     }
 }

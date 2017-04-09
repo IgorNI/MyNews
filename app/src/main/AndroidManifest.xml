@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".activity.ZhihuDetailActivity"
             android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.NewsDetailActivity"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

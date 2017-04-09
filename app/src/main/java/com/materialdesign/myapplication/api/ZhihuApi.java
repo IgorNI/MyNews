@@ -1,13 +1,11 @@
 package com.materialdesign.myapplication.api;
 
-import com.materialdesign.myapplication.bean.ZhihuDaily;
-import com.materialdesign.myapplication.bean.ZhihuStory;
-import com.materialdesign.myapplication.bean.image.ImageData;
+import com.materialdesign.myapplication.bean.zhihu.ZhihuDaily;
+import com.materialdesign.myapplication.bean.zhihu.ZhihuStory;
 import com.materialdesign.myapplication.bean.image.ImageResponse;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import rx.Observable;
 
 /**

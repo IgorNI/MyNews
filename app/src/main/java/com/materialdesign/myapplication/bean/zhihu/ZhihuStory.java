@@ -1,4 +1,4 @@
-package com.materialdesign.myapplication.bean;
+package com.materialdesign.myapplication.bean.zhihu;
 
 import com.google.gson.annotations.SerializedName;
 

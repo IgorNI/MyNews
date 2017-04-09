@@ -1,6 +1,5 @@
 package com.materialdesign.myapplication.activity;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -25,8 +24,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.materialdesign.myapplication.R;
 import com.materialdesign.myapplication.bean.Cheeses;
-import com.materialdesign.myapplication.bean.ZhihuStory;
-import com.materialdesign.myapplication.presenter.implPresenter.ZhihuPresenterImpl;
+import com.materialdesign.myapplication.bean.zhihu.ZhihuStory;
 import com.materialdesign.myapplication.presenter.implPresenter.ZhihuStoryPresenterImpl;
 import com.materialdesign.myapplication.presenter.implView.IZhihuStory;
 import com.materialdesign.myapplication.utils.AnimUtils;
@@ -65,7 +63,7 @@ public class ZhihuDetailActivity extends AppCompatActivity implements IZhihuStor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_detail);
+        setContentView(R.layout.zhihu_detail_layout);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         initListener();

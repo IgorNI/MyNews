@@ -1,6 +1,6 @@
 package com.materialdesign.myapplication.presenter.implPresenter;
 
-import com.materialdesign.myapplication.presenter.BasePresrenter;
+import com.materialdesign.myapplication.presenter.BasePresenter;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -9,7 +9,7 @@ import rx.subscriptions.CompositeSubscription;
  * Created by ni on 2017/3/23.
  */
 
-public class BasePresenterImpl implements BasePresrenter {
+public class BasePresenterImpl implements BasePresenter {
     private CompositeSubscription compositeSubscription; // 用于存储所有代办的subscription
 
     protected void addCompositeSubscription(Subscription s) {

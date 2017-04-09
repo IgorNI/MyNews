@@ -1,6 +1,6 @@
 package com.materialdesign.myapplication.presenter.implView;
 
-import com.materialdesign.myapplication.bean.ZhihuStory;
+import com.materialdesign.myapplication.bean.zhihu.ZhihuStory;
 
 /**
  * Created by ni on 2017/3/27.

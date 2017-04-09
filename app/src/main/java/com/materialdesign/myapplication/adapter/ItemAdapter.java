@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.materialdesign.myapplication.R;
 import com.materialdesign.myapplication.activity.MainActivity;
 import com.materialdesign.myapplication.activity.ZhihuDetailActivity;
-import com.materialdesign.myapplication.bean.ZhihuDailyItem;
+import com.materialdesign.myapplication.bean.zhihu.ZhihuDailyItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,15 +32,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private TypedValue typeValue = new TypedValue();
     private boolean showLoadMore;
     private int background;
-    private List<String> list;
     private ArrayList<ZhihuDailyItem> zhihuDailyItems = new ArrayList<>();
     private Context mContext;
     private String imageUrl;
 
-    public ItemAdapter(Context context, List<String> randomList) {
+    public ItemAdapter(Context context) {
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground,typeValue,false);
         background = typeValue.resourceId;
-        list = randomList;
         mContext = context;
     }
 
@@ -123,7 +121,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return zhihuDailyItems.size();
     }
 
     public void clearData() {

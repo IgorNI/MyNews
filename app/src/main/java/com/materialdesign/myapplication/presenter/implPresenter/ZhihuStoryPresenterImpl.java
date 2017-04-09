@@ -1,7 +1,7 @@
 package com.materialdesign.myapplication.presenter.implPresenter;
 
 import com.materialdesign.myapplication.api.ApiManager;
-import com.materialdesign.myapplication.bean.ZhihuStory;
+import com.materialdesign.myapplication.bean.zhihu.ZhihuStory;
 import com.materialdesign.myapplication.presenter.ZhihuStoryPresenter;
 import com.materialdesign.myapplication.presenter.implView.IZhihuStory;
 

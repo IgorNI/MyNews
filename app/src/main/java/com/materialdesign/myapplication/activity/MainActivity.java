@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.materialdesign.myapplication.R;
+import com.materialdesign.myapplication.fragment.WangyiNewsFragment;
 import com.materialdesign.myapplication.fragment.ZhihuFragment;
 
 import java.util.ArrayList;
@@ -79,10 +80,9 @@ public class MainActivity extends AppCompatActivity
     private void loadViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFramgent(new ZhihuFragment(),"title1");
-        adapter.addFramgent(new ZhihuFragment(),"title2");
+        adapter.addFramgent(new WangyiNewsFragment(),"title2");
         adapter.addFramgent(new ZhihuFragment(),"title3");
         viewPager.setAdapter(adapter);
-
     }
 
     @Override
