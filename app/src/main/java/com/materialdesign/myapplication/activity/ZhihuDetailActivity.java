@@ -111,6 +111,12 @@ public class ZhihuDetailActivity extends AppCompatActivity implements IZhihuStor
                 mNest.smoothScrollBy(0,0);
             }
         });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         WebSettings settings = wvZhihu.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -250,5 +256,6 @@ public class ZhihuDetailActivity extends AppCompatActivity implements IZhihuStor
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
     }
 }
