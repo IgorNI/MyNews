@@ -39,14 +39,10 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-//    @BindView(R.id.viewpager)
-//    ViewPager viewPager;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
-//    @BindView(R.id.tabs)
-//    TabLayout tabLayout;
     @BindView(R.id.fab)
     FloatingActionButton fab;
     @BindView(R.id.toolbar)
