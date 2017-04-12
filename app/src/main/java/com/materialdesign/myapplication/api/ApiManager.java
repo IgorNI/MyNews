@@ -15,16 +15,17 @@ public class ApiManager {
     public NewsApi newsApi;
     private Object zhihuMonitor = new Object();
 
+    // 单例模式中的懒汉模式，双重检查枷锁，保证线程安全
     public static ApiManager getInstance() {
-        if (apiManager == null) {
-            synchronized (ApiManager.class) {
-                if (apiManager == null) {
-                    apiManager = new ApiManager();
-                }
+    if (apiManager == null) {
+        synchronized (ApiManager.class) {
+            if (apiManager == null) {
+                apiManager = new ApiManager();
             }
         }
-        return apiManager;
     }
+    return apiManager;
+}
 
     public ZhihuApi getZhihuApiService() {
         if (zhihuApi == null) {

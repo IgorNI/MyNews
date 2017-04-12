@@ -66,12 +66,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
-//        public String backGroundString;
-//        private View view;
-//        @BindView(R.id.circle_iv)
-//        public ImageView imageView;
-//        @BindView(R.id.tv)
-//        public TextView textView;
         private View view;
         @BindView(R.id.item_text_id)
         TextView itemText;
@@ -84,7 +78,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             view = itemView;
             ButterKnife.bind(this,view);
         }
-
     }
     @Override
     public ItemAdapter.ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

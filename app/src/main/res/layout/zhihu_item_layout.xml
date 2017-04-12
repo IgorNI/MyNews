@@ -4,6 +4,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:foreground="@drawable/mid_grey_ripple"
+    android:stateListAnimator="@animator/raise"
     android:paddingTop="1dp"
     android:paddingBottom="1dp">
 

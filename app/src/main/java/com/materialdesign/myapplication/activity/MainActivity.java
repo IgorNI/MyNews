@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity
                 .getClass().getName().equals(fragment.getClass().getName()))
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment)
                     .commit();
-//        toolbar.setTitle(title);
+        toolbar.setTitle(title);
         mCurrentFragment = fragment;
     }
 
