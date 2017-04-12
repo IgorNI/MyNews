@@ -1,7 +1,5 @@
 package com.materialdesign.myapplication.api;
 
-import java.util.Objects;
-
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;

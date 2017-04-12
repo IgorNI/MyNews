@@ -60,10 +60,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,6 +142,7 @@ public class MainActivity extends AppCompatActivity
                 .getClass().getName().equals(fragment.getClass().getName()))
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment)
                     .commit();
+//        toolbar.setTitle(title);
         mCurrentFragment = fragment;
     }
 
@@ -175,13 +174,6 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = shared.edit();
         editor.putInt(context.getString(R.string.nevigation_item),t);
         editor.commit();
-    }
-    private void loadViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFramgent(new ZhihuFragment(),"title1");
-        adapter.addFramgent(new WangyiNewsFragment(),"title2");
-        adapter.addFramgent(new ZhihuFragment(),"title3");
-        viewPager.setAdapter(adapter);
     }
 
     @Override
@@ -231,34 +223,6 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    static class Adapter extends FragmentPagerAdapter {
-        private List<Fragment> fragmentList = new ArrayList<>();
-        private List<String> fragmentTitleList = new ArrayList<>();
-        public Adapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        public void addFramgent(Fragment fragment,String title) {
-            this.fragmentList.add(fragment);
-            this.fragmentTitleList.add(title);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return fragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragmentList.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return fragmentTitleList.get(position);
-        }
     }
 
     public interface loadMore {
