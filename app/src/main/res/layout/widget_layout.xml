@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="250dp"
+    android:layout_height="16dp">
+
+    <ImageView
+        android:id="@+id/iv_widget"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/news_widget" />
+
+    <TextView
+        android:id="@+id/tv_widget"
+        tools:text="加油加油加油加油"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+</LinearLayout>

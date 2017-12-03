@@ -13,6 +13,7 @@ public class ApiManager {
     public static ApiManager apiManager;
     public ZhihuApi zhihuApi;
     public NewsApi newsApi;
+    public GoogleMapLocationApi googleMapLocationApi;
     private Object zhihuMonitor = new Object();
 
     // 单例模式中的懒汉模式，双重检查枷锁，保证线程安全
@@ -57,5 +58,21 @@ public class ApiManager {
             }
         }
         return newsApi;
+    }
+
+    public GoogleMapLocationApi getLocationService() {
+        if (googleMapLocationApi == null) {
+            synchronized (zhihuMonitor) {
+                if (googleMapLocationApi == null) {
+                    googleMapLocationApi = new Retrofit.Builder()
+                            .baseUrl("http://maps.google.com/maps/")
+                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                            .client(new OkHttpClient())
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build().create(GoogleMapLocationApi.class);
+                }
+            }
+        }
+        return googleMapLocationApi;
     }
 }

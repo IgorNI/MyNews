@@ -6,5 +6,4 @@ package com.materialdesign.myapplication.presenter;
 
 public interface ZhihuStoryPresenter extends BasePresenter {
     void getZhuhuStory(String id);
-
 }

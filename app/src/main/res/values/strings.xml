@@ -8,4 +8,10 @@
     <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue     cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian     bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber     cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese     the big cheese</string>
     <string name="wangyinews">网易新闻</string>
     <string name="zhihu">知乎头条</string>
+    <string name="get_location_failed">定位获取失败</string>
+    <string name="location_info">定位信息</string>
+    <string name="your_location_is">Your location is %s</string>
+    <string name="confirm">确定</string>
+    <string name="history">历史记录</string>
+    <string name="network_failed">网络未连接，请检查网络</string>
 </resources>

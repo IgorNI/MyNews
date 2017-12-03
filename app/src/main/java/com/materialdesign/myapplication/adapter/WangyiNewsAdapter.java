@@ -1,27 +1,23 @@
 package com.materialdesign.myapplication.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.materialdesign.myapplication.R;
 import com.materialdesign.myapplication.activity.MainActivity;
 import com.materialdesign.myapplication.activity.NewsDetailActivity;
 import com.materialdesign.myapplication.bean.news.NewsBean;
-import com.materialdesign.myapplication.bean.news.NewsList;
+import com.materialdesign.myapplication.utils.NetWorkUtils;
 import com.materialdesign.myapplication.widget.BadgedFourThreeImageView;
-import com.materialdesign.myapplication.widget.FourThreeImageView;
 
 import java.util.ArrayList;
 
@@ -102,7 +98,12 @@ public class WangyiNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         intent.putExtra("docid", newsBean.getDocid());
         intent.putExtra("title", newsBean.getTitle());
         intent.putExtra("image", newsBean.getImgsrc());
-        mContext.startActivity(intent);
+        if (NetWorkUtils.isNetworkConnected(mContext)) {
+            mContext.startActivity(intent);
+        }else {
+            Toast.makeText(mContext,mContext.getString(R.string.network_failed),Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override

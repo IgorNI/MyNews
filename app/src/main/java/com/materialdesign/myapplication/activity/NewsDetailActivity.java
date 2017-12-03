@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.transition.Transition;
@@ -58,6 +59,7 @@ public class NewsDetailActivity extends AppCompatActivity implements IWangyiNews
     private NestedScrollView.OnScrollChangeListener scrollListener;
     private android.transition.Transition.TransitionListener mEnterTransitionListener;
     private android.transition.Transition.TransitionListener mReturnHomeTransitionListener;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

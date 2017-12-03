@@ -10,15 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.materialdesign.myapplication.R;
 import com.materialdesign.myapplication.activity.MainActivity;
 import com.materialdesign.myapplication.activity.ZhihuDetailActivity;
 import com.materialdesign.myapplication.bean.zhihu.ZhihuDailyItem;
+import com.materialdesign.myapplication.utils.NetWorkUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -109,7 +110,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         intent.putExtra("id",zhihuDailyItem.getId());
         intent.putExtra("title",zhihuDailyItem.getTitle());
         intent.putExtra("image",imageUrl);
-        mContext.startActivity(intent);
+        if (NetWorkUtils.isNetworkConnected(mContext)) {
+            mContext.startActivity(intent);
+        }else {
+            Toast.makeText(mContext,mContext.getString(R.string.network_failed),Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

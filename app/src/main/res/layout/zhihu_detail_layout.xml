@@ -38,7 +38,8 @@
                 android:outlineProvider="none"
                 android:elevation="1dp"
                 android:background="#3b000000"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin"
+                app:title="@string/zhihu"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
