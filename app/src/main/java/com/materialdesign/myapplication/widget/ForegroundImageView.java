@@ -5,9 +5,9 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.ViewOutlineProvider;
-import android.widget.ImageView;
 
 import com.materialdesign.myapplication.R;
 
@@ -15,7 +15,7 @@ import com.materialdesign.myapplication.R;
  * Created by ni on 2017/3/24.
  */
 
-public class ForegroundImageView extends ImageView {
+public class ForegroundImageView extends AppCompatImageView {
     private Drawable foreground;
 
     public ForegroundImageView(Context context, AttributeSet attrs) {
@@ -28,7 +28,9 @@ public class ForegroundImageView extends ImageView {
             }
         }
         a.recycle();
-        setOutlineProvider(ViewOutlineProvider.BOUNDS);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setOutlineProvider(ViewOutlineProvider.BOUNDS);
+        }
     }
 
     public ForegroundImageView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -41,7 +43,9 @@ public class ForegroundImageView extends ImageView {
             }
         }
         a.recycle();
-        setOutlineProvider(ViewOutlineProvider.BOUNDS);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setOutlineProvider(ViewOutlineProvider.BOUNDS);
+        }
     }
 
     @Override
@@ -117,7 +121,9 @@ public class ForegroundImageView extends ImageView {
     public void drawableHotspotChanged(float x, float y) {
         super.drawableHotspotChanged(x, y);
         if (foreground != null) {
-            foreground.setHotspot(x, y);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                foreground.setHotspot(x, y);
+            }
         }
     }
 }

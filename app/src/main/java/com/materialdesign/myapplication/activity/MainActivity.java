@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity
         context = MainActivity.this;
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("知乎头条");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.nav_item));
+
+        drawer.setBackgroundColor(getResources().getColor(R.color.nav_item));
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         addFragmentAndTitle();
         if (savedInstanceState == null) {
@@ -146,6 +150,7 @@ public class MainActivity extends AppCompatActivity
         });
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setBackgroundColor(getResources().getColor(R.color.nav_item));
         requestLocationPermission();
         getDeviceLocation();
         fab.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +188,7 @@ public class MainActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment)
                         .commit();
                 toolbar.setTitle(title);
+                toolbar.setTitleTextColor(getResources().getColor(R.color.nav_item));
                 mCurrentFragment = fragment;
             }else {
                 Toast.makeText(context,getString(R.string.network_failed),Toast.LENGTH_SHORT).show();

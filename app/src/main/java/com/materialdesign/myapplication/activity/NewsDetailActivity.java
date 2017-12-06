@@ -180,6 +180,7 @@ public class NewsDetailActivity extends AppCompatActivity implements IWangyiNews
         imgSrc = getIntent().getStringExtra("image");
         title = getIntent().getStringExtra("title");
         collapsingToolbarLayout.setTitle(title);
+        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.nav_item));
         Glide.with(this)
                 .load(imgSrc)
                 .fitCenter()
