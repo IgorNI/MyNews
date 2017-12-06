@@ -1,10 +1,9 @@
 package com.materialdesign.myapplication.presenter.implPresenter;
 
-import android.content.Context;
-
 import com.materialdesign.myapplication.bean.news.NewsDetailBean;
 import com.materialdesign.myapplication.presenter.IWangyiNewsDescPresenter;
 import com.materialdesign.myapplication.presenter.implView.IWangyiNewsDescFragment;
+import com.materialdesign.myapplication.utils.DBUtils;
 import com.materialdesign.myapplication.utils.NewsJsonUtils;
 import com.materialdesign.myapplication.utils.OkHttpUtils;
 import com.materialdesign.myapplication.utils.Urls;

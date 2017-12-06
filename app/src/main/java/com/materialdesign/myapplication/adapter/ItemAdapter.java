@@ -1,7 +1,11 @@
 package com.materialdesign.myapplication.adapter;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -17,6 +21,7 @@ import com.materialdesign.myapplication.R;
 import com.materialdesign.myapplication.activity.MainActivity;
 import com.materialdesign.myapplication.activity.ZhihuDetailActivity;
 import com.materialdesign.myapplication.bean.zhihu.ZhihuDailyItem;
+import com.materialdesign.myapplication.data.NewsContract;
 import com.materialdesign.myapplication.utils.NetWorkUtils;
 
 import java.util.ArrayList;
@@ -82,15 +87,33 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
     @Override
     public ItemAdapter.ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cheese_item_layout,parent,false);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.zhihu_item_layout,parent,false);
-//        view.setBackgroundResource(background);
         return new ItemAdapter.ItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
         final ZhihuDailyItem zhihuDailyItem = zhihuDailyItems.get(position);
+
+        ContentValues values = new ContentValues();
+        values.put(NewsContract.ZhihuNewsEntry.KEY,zhihuDailyItem.getTitle());
+        values.put(NewsContract.ZhihuNewsEntry.IS_READ,1);
+        Uri uri = NewsContract.ZhihuNewsEntry.buildZhihuIsRead(zhihuDailyItem.getTitle());
+        Cursor cursor = mContext.getContentResolver().query(uri,new String[]{"key","is_read"},"key=?",new String[]{zhihuDailyItem.getTitle()},null);
+        if (cursor.moveToFirst()) {
+            int isread;
+            do {
+                // 获取字段的值
+                isread = cursor.getInt(cursor.getColumnIndex("is_read"));
+                if (isread == 1) {
+                    holder.itemText.setTextColor(Color.GRAY);
+                }else {
+                    holder.itemText.setTextColor(Color.BLACK);
+                }
+            } while (cursor.moveToNext());
+        }else {
+            holder.itemText.setTextColor(Color.BLACK);
+        }
         holder.itemText.setText(zhihuDailyItem.getTitle());
         Glide.with(mContext)
                 .load(zhihuDailyItems.get(position).getImages()[0])
@@ -105,6 +128,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     private void goToZhihuDetailActivity(ItemViewHolder holder, ZhihuDailyItem zhihuDailyItem) {
+        holder.itemText.setTextColor(Color.GRAY);
         Intent intent = new Intent();
         intent.setClass(mContext, ZhihuDetailActivity.class);
         intent.putExtra("id",zhihuDailyItem.getId());

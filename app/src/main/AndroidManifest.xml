@@ -37,6 +37,10 @@
             android:theme="@style/AppTheme"/>
         <activity android:name=".activity.SimpleFragmentModeActivity"
             android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.ZhihuHistoryDetailActivity"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.NewsHistoryDetailActivity"
+            android:theme="@style/AppTheme"/>
 
         <!--桌面widget-->
         <receiver android:name=".widget.NewsWidgetProvider">
@@ -48,6 +52,9 @@
                 android:resource="@xml/widget_info" />
         </receiver>
         <service android:name=".widget.UpdateWidgetService"/>
+        <provider
+            android:authorities="com.materialdesign.myapplication"
+            android:name=".data.NewsContentProvider"/>
     </application>
 
 

@@ -1,7 +1,11 @@
 package com.materialdesign.myapplication.adapter;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +20,7 @@ import com.materialdesign.myapplication.R;
 import com.materialdesign.myapplication.activity.MainActivity;
 import com.materialdesign.myapplication.activity.NewsDetailActivity;
 import com.materialdesign.myapplication.bean.news.NewsBean;
+import com.materialdesign.myapplication.data.NewsContract;
 import com.materialdesign.myapplication.utils.NetWorkUtils;
 import com.materialdesign.myapplication.widget.BadgedFourThreeImageView;
 
@@ -72,15 +77,44 @@ public class WangyiNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private void bindItemViewHolder(final NewsViewHolder holder, int position) {
         final NewsBean newsBean = newsItems.get(holder.getAdapterPosition());
+//        if (DBUtils.getDB(mContext).isRead(Config.TOPNEWS, newsBean.getTitle(), 1)){
+            ContentValues values = new ContentValues();
+            values.put(NewsContract.TopNewsEntry.KEY,newsBean.getTitle());
+            values.put(NewsContract.TopNewsEntry.IS_READ,1);
+            Uri uri = NewsContract.TopNewsEntry.buildTopIsRead(newsBean.getTitle());
+            Cursor cursor = mContext.getContentResolver().query(uri,new String[]{"key","is_read"},"key=?",new String[]{newsBean.getTitle()},null);
+            if (cursor.moveToFirst()) {
+                int isread;
+                do {
+                    // 获取字段的值
+                    isread = cursor.getInt(cursor.getColumnIndex("is_read"));
+                    if (isread == 1) {
+                        holder.textView.setTextColor(Color.GRAY);
+                        holder.sourceTextview.setTextColor(Color.GRAY);
+                    }else {
+                        holder.textView.setTextColor(Color.BLACK);
+                        holder.sourceTextview.setTextColor(Color.BLACK);
+                    }
+                } while (cursor.moveToNext());
+            }else {
+                holder.textView.setTextColor(Color.BLACK);
+                holder.sourceTextview.setTextColor(Color.BLACK);
+            }
+//        }
+
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.textView.setTextColor(Color.GRAY);
+                holder.sourceTextview.setTextColor(Color.GRAY);
                 newsDetailActivity(newsBean,holder);
             }
         });
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.textView.setTextColor(Color.GRAY);
+                holder.sourceTextview.setTextColor(Color.GRAY);
                 newsDetailActivity(newsBean,holder);
             }
         });
