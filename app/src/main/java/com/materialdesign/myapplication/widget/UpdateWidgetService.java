@@ -1,13 +1,25 @@
 package com.materialdesign.myapplication.widget;
 
+import android.annotation.TargetApi;
 import android.app.IntentService;
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.widget.RemoteViews;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.materialdesign.myapplication.R;
+import com.materialdesign.myapplication.activity.MainActivity;
 import com.materialdesign.myapplication.api.ApiManager;
 import com.materialdesign.myapplication.bean.zhihu.ZhihuDaily;
 import com.materialdesign.myapplication.bean.zhihu.ZhihuDailyItem;
-import com.materialdesign.myapplication.utils.KeyUtils;
 
 import rx.Observer;
 import rx.Subscription;
@@ -24,6 +36,10 @@ import rx.schedulers.Schedulers;
 
 public class UpdateWidgetService extends IntentService{
 
+    private String id;
+    private String title;
+    private String imageUrl;
+    private Bitmap[] bitmap = new Bitmap[1];
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
      *
@@ -35,10 +51,17 @@ public class UpdateWidgetService extends IntentService{
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        postNewsAtHalfHourPeriod();
+        postNewsAtHalfAnHourPeriod();
     }
 
-    private void postNewsAtHalfHourPeriod() {
+    private void postNewsAtHalfAnHourPeriod() {
+
+        // Retrieve all of the Today widget ids: these are the widgets we need to update
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this,
+                NewsWidgetProvider.class));
+        // Get today's data from the NetWork
+
         Subscription subscription = ApiManager.getInstance().getZhihuApiService().getLastDay()
                 .map(new Func1<ZhihuDaily, ZhihuDaily>() {
 
@@ -69,13 +92,40 @@ public class UpdateWidgetService extends IntentService{
                     @Override
                     public void onNext(ZhihuDaily zhihuDaily) {
                         ZhihuDailyItem item = zhihuDaily.getmZhihuDailyItems().get(0);
-                        String id = item.getId();
-                        String title = item.getTitle();
-                        Intent intent = new Intent(KeyUtils.KEY_UPDATE_WIDGET_STR);
-                        intent.putExtra(KeyUtils.KEY_NEWS_ID_STR,id);
-                        intent.putExtra(KeyUtils.KEY_NEWS_TITLE_STR,title);
-                        sendBroadcast(intent);
+                        id = item.getId();
+                        title = item.getTitle();
                     }
                 });
+
+        // Perform this loop procedure for each Today widget
+        for (int appWidgetId : appWidgetIds) {
+            int layoutId = R.layout.widget_layout;
+            RemoteViews views = new RemoteViews(getPackageName(), layoutId);
+
+            views.setImageViewResource(R.id.iv_widget, R.drawable.zhihu);
+            Log.i("1234", "postNewsAtHalfAnHourPeriod: " + title);
+            if ("".equals(title) || title == null) {
+                views.setTextViewText(R.id.tv_widget,getString(R.string.tips));
+            }else {
+                views.setTextViewText(R.id.tv_widget,title);
+            }
+
+            // Content Descriptions for RemoteViews were only added in ICS MR1
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+                setRemoteContentDescription(views, getResources().getString(R.string.zhihu));
+            }
+
+            // Create an Intent to launch MainActivity
+            Intent launchIntent = new Intent(this, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, launchIntent, 0);
+            views.setOnClickPendingIntent(R.id.ll_widget, pendingIntent);
+
+            // Tell the AppWidgetManager to perform an update on the current app widget
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        }
+    }
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+    private void setRemoteContentDescription(RemoteViews views, String description) {
+        views.setContentDescription(R.id.iv_widget, description);
     }
 }

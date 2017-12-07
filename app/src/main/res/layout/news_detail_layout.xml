@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".activity.NewsDetailActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -21,13 +23,18 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="48dp"
+            android:transitionName="@string/transition_topnew_linear"
             app:expandedTitleMarginEnd="64dp">
 
-            <ImageView
+            <com.materialdesign.myapplication.view.ParallaxScrimageView
                 android:id="@+id/backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
+                android:minHeight="168dp"
+                android:contentDescription="@string/picture"
+                android:transitionName="@string/transition_topnew"
+                android:foreground="@drawable/mid_grey_ripple"
                 android:fitsSystemWindows="true"
                 app:layout_collapseMode="parallax" />
 

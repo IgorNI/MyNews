@@ -1,24 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
-    android:layout_width="250dp"
-    android:layout_height="16dp">
+android:layout_width="match_parent"
+android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_widget"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/news_widget" />
+    <LinearLayout
+        android:id="@+id/ll_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:foreground="@drawable/mid_grey_ripple"
+        android:orientation="horizontal"
+        android:padding="4dp">
 
-    <TextView
-        android:id="@+id/tv_widget"
-        tools:text="加油加油加油加油"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:layout_marginStart="10dp"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/iv_widget"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:elevation="2dp"
+            android:scaleType="centerCrop"
+            android:foreground="@drawable/mid_grey_ripple"
+            android:stateListAnimator="@animator/raise" />
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/tv_widget"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:stateListAnimator="@animator/raise"
+            android:textColor="@color/text_color"
+            android:textSize="18sp" />
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_widget"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:src="@drawable/news_widget" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_widget"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="#000000"-->
+            <!--android:text="加油加油加油加油"-->
+            <!--android:textSize="16sp" />-->
+    </LinearLayout>
+</FrameLayout>

@@ -22,6 +22,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
@@ -35,7 +36,6 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.materialdesign.myapplication.R;
@@ -46,6 +46,7 @@ import com.materialdesign.myapplication.fragment.WangyiNewsFragment;
 import com.materialdesign.myapplication.fragment.ZhihuFragment;
 import com.materialdesign.myapplication.utils.KeyUtils;
 import com.materialdesign.myapplication.utils.NetWorkUtils;
+import com.materialdesign.myapplication.widget.AutoRequestService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -75,12 +76,8 @@ public class MainActivity extends AppCompatActivity
 
     // Google Map 定位所需
     private static final String TAG = "Google Map";
-    private String QUERYADDRESS = "http://maps.googleapis.com/maps/api/geocode/json?latlng=%s,%s&sensor=true&language=zh_cn";
-    private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    private GoogleMap mMap;
     private boolean mLocationPermissionGranted;
-    private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
     private Location mLastKnownLocation;
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
@@ -97,9 +94,6 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         toolbar.setTitle("知乎头条");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.nav_item));
-
-        drawer.setBackgroundColor(getResources().getColor(R.color.nav_item));
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         addFragmentAndTitle();
         if (savedInstanceState == null) {
@@ -139,33 +133,25 @@ public class MainActivity extends AppCompatActivity
                         statusBarBackground.getLayoutParams();
                 lpStatus.height = insets.getSystemWindowInsetTop();
                 statusBarBackground.setLayoutParams(lpStatus);
-
-                // inset the filters list for the status bar / navbar
-                // need to set the padding end for landscape case
-
-                // clear this listener so insets aren't re-applied
                 drawer.setOnApplyWindowInsetsListener(null);
                 return insets.consumeSystemWindowInsets();
             }
         });
         toggle.syncState();
+        Slide slide = new Slide();
+        slide.setDuration(3000L);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setBackgroundColor(getResources().getColor(R.color.nav_item));
         requestLocationPermission();
         getDeviceLocation();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-//                Bundle bundle = new Bundle();
-//                bundle.putDouble(KeyUtils.KEY_LATITUDE_STR,latitute);
-//                bundle.putDouble(KeyUtils.KEY_LONGITUDE_STR,longtitute);
-//                bundle.putString(KeyUtils.KEY_LOCATION_INFO_STR,locationInfo);
                 intent.setClass(MainActivity.this,SimpleFragmentModeActivity.class);
-//                intent.putExtra(KeyUtils.KEY_BUNDLE_STR,bundle);
                 startActivityForResult(intent,KeyUtils.REQUEST_CODE);
             }
         });
+        startService(new Intent(this, AutoRequestService.class));
     }
 
 
@@ -188,7 +174,6 @@ public class MainActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment)
                         .commit();
                 toolbar.setTitle(title);
-                toolbar.setTitleTextColor(getResources().getColor(R.color.nav_item));
                 mCurrentFragment = fragment;
             }else {
                 Toast.makeText(context,getString(R.string.network_failed),Toast.LENGTH_SHORT).show();

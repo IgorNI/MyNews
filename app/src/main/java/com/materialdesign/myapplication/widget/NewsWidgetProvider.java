@@ -1,16 +1,12 @@
 package com.materialdesign.myapplication.widget;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.RemoteViews;
 
-import com.materialdesign.myapplication.R;
-import com.materialdesign.myapplication.activity.MainActivity;
+import com.materialdesign.myapplication.config.Config;
 
 /**
  * @Description : 桌面widget
@@ -26,30 +22,16 @@ public class NewsWidgetProvider extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        Intent startUpdateIntent = new Intent(context, UpdateWidgetService.class);
-        context.startService(startUpdateIntent);
+        String action = intent.getAction();
+        if (Config.ACTION_DATA_UPDATED.equals(action)) {
+            context.startService(new Intent(context,UpdateWidgetService.class));
+        }
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-        for (int i = 0; i < appWidgetIds.length; i++) {
-            int appWidgetId = appWidgetIds[i];
-            Log.i("shenlong", "onUpdate appWidgetId=" + appWidgetId);
-            Intent intent = new Intent();
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                    Intent.FLAG_ACTIVITY_TASK_ON_HOME);
-            intent.setClass(context, MainActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            // Get the layout for the App Widget and attach an on-click listener
-            // to the button
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-            views.setOnClickPendingIntent(R.id.iv_widget, pendingIntent);
-
-            // Tell the AppWidgetManager to perform an update on the current app widget
-            appWidgetManager.updateAppWidget(appWidgetId, views);
-        }
+        context.startService(new Intent(context,UpdateWidgetService.class));
     }
 
 
@@ -74,8 +56,6 @@ public class NewsWidgetProvider extends AppWidgetProvider {
     @Override
     public void onEnabled(Context context) {
         super.onEnabled(context);
-        Intent startUpdateIntent = new Intent(context, UpdateWidgetService.class);
-        context.startService(startUpdateIntent);
     }
 
     /**
@@ -99,6 +79,7 @@ public class NewsWidgetProvider extends AppWidgetProvider {
     @Override
     public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle newOptions) {
         super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions);
+        context.startService(new Intent(context,UpdateWidgetService.class));
     }
 
     @Override

@@ -170,7 +170,6 @@ public class NewsHistoryDetailActivity extends AppCompatActivity {
         imgSrc = getIntent().getStringExtra("image");
         content = getIntent().getStringExtra("content");
         collapsingToolbarLayout.setTitle(title);
-        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.nav_item));
         Glide.with(this)
                 .load(imgSrc)
                 .fitCenter()

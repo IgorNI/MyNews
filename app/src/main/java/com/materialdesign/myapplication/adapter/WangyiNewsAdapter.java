@@ -1,11 +1,13 @@
 package com.materialdesign.myapplication.adapter;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,11 +42,13 @@ public class WangyiNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static final int TYPE_NORMAL_ITEM = 1;
     private ArrayList<NewsBean> newsItems = new ArrayList<>();
     private boolean showLoadingMore = false;
+    private Activity mActivity;
 
 
-    public WangyiNewsAdapter(Context context) {
+
+    public WangyiNewsAdapter(Context context, FragmentActivity activity) {
         this.mContext = context;
-
+        mActivity = activity;
     }
 
     @Override

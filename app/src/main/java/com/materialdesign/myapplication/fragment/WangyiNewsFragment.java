@@ -77,7 +77,7 @@ public class WangyiNewsFragment extends Fragment implements IWangyiNewsFragment 
 
     private void initDate() {
         presenterImpl = new WangyiNewsPresenterImpl(this);
-        mAdapter = new WangyiNewsAdapter(getContext());
+        mAdapter = new WangyiNewsAdapter(getContext(),getActivity());
     }
 
     @Override

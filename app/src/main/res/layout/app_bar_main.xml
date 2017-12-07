@@ -27,6 +27,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:elevation="1dp"
+            android:contentDescription="@string/tool_bar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"/>
     </FrameLayout>
@@ -36,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:contentDescription="@string/map"
         app:srcCompat="@drawable/location" />
 
 </android.support.design.widget.CoordinatorLayout>

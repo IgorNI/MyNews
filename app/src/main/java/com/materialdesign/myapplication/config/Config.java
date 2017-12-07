@@ -21,4 +21,6 @@ public class Config {
     public static final String TYPE = "type";
 
     public static final Uri CONTENT_URI  = Uri.parse("content://com.zhuanghongji.MyContentProvider");
+
+    public static final String ACTION_DATA_UPDATED = "com.materialdesign.myapplication.ACTION_DATA_UPDATED";
 }

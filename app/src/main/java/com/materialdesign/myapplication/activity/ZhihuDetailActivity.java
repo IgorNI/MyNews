@@ -95,6 +95,7 @@ public class ZhihuDetailActivity extends AppCompatActivity implements IZhihuStor
                                 .setInterpolator(new AccelerateInterpolator());
                         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
                             toolbar.setElevation(0f);
+                            imageView.setElevation(1f);
                         }
                         mNest.animate()
                                 .alpha(0f)
@@ -106,7 +107,6 @@ public class ZhihuDetailActivity extends AppCompatActivity implements IZhihuStor
     }
     private void initView() {
         collapsingToolbarLayout.setTitle(mTitle);
-        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.nav_item));
         toolbar.setTitleMargin(20,20,0,10);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         toolbar.setOnClickListener(new View.OnClickListener() {

@@ -24,7 +24,7 @@
             android:value="@string/google_maps_key" />
         <activity
             android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/Look.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,26 +32,29 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ZhihuDetailActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/Look.Translucent.Look.Image"/>
         <activity android:name=".activity.NewsDetailActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/Look.Translucent.Look.Image"/>
         <activity android:name=".activity.SimpleFragmentModeActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/Look.Home"/>
         <activity android:name=".activity.ZhihuHistoryDetailActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/Look.Home"/>
         <activity android:name=".activity.NewsHistoryDetailActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/Look.Home"/>
 
         <!--桌面widget-->
         <receiver android:name=".widget.NewsWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.materialdesign.myapplication.ACTION_DATA_UPDATED" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
+        <receiver android:name=".widget.AlarmReceiver"/>
         <service android:name=".widget.UpdateWidgetService"/>
+        <service android:name=".widget.AutoRequestService"/>
         <provider
             android:authorities="com.materialdesign.myapplication"
             android:name=".data.NewsContentProvider"/>

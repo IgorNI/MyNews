@@ -104,7 +104,6 @@ public class ZhihuHistoryDetailActivity extends AppCompatActivity {
     }
     private void initView() {
         collapsingToolbarLayout.setTitle(mTitle);
-        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.nav_item));
         toolbar.setTitleMargin(20,20,0,10);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         toolbar.setOnClickListener(new View.OnClickListener() {
